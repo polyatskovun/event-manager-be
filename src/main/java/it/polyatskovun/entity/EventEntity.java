@@ -1,13 +1,18 @@
 package it.polyatskovun.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class Event {
+@Data
+@EqualsAndHashCode(of = "id")
+@Table(name = "event")
+@Entity()
+public class EventEntity {
     @Id
     @GeneratedValue
     private UUID id;
@@ -19,20 +24,19 @@ public class Event {
 
     @ManyToMany
     @JoinTable(
-            name = "event_guests",
+            name = "event_guest",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "guest_id")
     )
-    private List<Guest> guests;
+    private List<GuestEntity> guests;
 
     @ManyToMany
     @JoinTable(
-            name = "event_options",
+            name = "event_option",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id")
     )
-    private List<Option> options;
-
+    private List<OptionEntity> options;
 
     // Getters and Setters
 }

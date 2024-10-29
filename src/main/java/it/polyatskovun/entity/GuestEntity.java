@@ -1,14 +1,16 @@
 package it.polyatskovun.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
+@Data
+@EqualsAndHashCode(of = "id")
+@Table(name = "guest")
 @Entity
-public class Guest {
+public class GuestEntity {
     @Id
     @GeneratedValue
     private UUID id;

@@ -2,26 +2,145 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="1" author="vverba">
-        <createTable tableName="demo">
-            <column name="id" type="uuid">
-                <constraints primaryKey="true"/>
+    <changeSet id="1" author="polyatskova">
+        <createTable tableName="event">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="text"/>
-            <column name="order_number" type="int"/>
+            <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
-        <createTable tableName="sub">
-            <column name="id" type="uuid">
-                <constraints primaryKey="true"/>
+        <createTable tableName="guest">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="date" type="timestamp"/>
-            <column name="demo_id" type="uuid">
-                <constraints foreignKeyName="sub_demo_id_fk" references="demo(id)"/>
+            <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telephone" type="VARCHAR(12)"/>
+            <column name="email" type="VARCHAR(32)"/>
+            <column name="order" type="INT"/>
+        </createTable>
+
+        <createTable tableName="option">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="done" type="BOOLEAN"/>
+            <column name="order" type="INT"/>
+        </createTable>
+
+        <createTable tableName="event_guest">
+            <column name="event_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_event_guest_event"
+                             references="event(id)"/>
+            </column>
+            <column name="guest_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_event_guest_guest"
+                             references="guest(id)"/>
             </column>
         </createTable>
+        <addPrimaryKey tableName="event_guest" columnNames="event_id, guest_id" constraintName="pk_event_guest"/>
+
+        <createTable tableName="event_option">
+            <column name="event_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_event_option_event"
+                             references="event(id)"/>
+            </column>
+            <column name="option_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_event_option_option"
+                             references="option(id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="event_option" columnNames="event_id, option_id" constraintName="pk_event_option"/>
+
+    </changeSet>
+
+    <changeSet id="2" author="polyatskova">
+        <insert tableName="event">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Wedding"/>
+            <column name="date" valueDate="2024-06-15"/>
+        </insert>
+        <insert tableName="event">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Corporate Meeting"/>
+            <column name="date" valueDate="2024-07-20"/>
+        </insert>
+        <insert tableName="event">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Birthday Party"/>
+            <column name="date" valueDate="2024-08-10"/>
+        </insert>
+        <insert tableName="event">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Charity Gala"/>
+            <column name="date" valueDate="2024-09-15"/>
+        </insert>
+
+        <insert tableName="guest">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="John Doe"/>
+            <column name="telephone" value="1234567890"/>
+            <column name="email" value="john.doe@example.com"/>
+            <column name="order" value="1"/>
+        </insert>
+        <insert tableName="guest">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Jane Smith"/>
+            <column name="telephone" value="0987654321"/>
+            <column name="email" value="jane.smith@example.com"/>
+            <column name="order" value="2"/>
+        </insert>
+        <insert tableName="guest">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Michael Johnson"/>
+            <column name="telephone" value="1122334455"/>
+            <column name="email" value="michael.johnson@example.com"/>
+            <column name="order" value="3"/>
+        </insert>
+        <insert tableName="guest">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Emily Davis"/>
+            <column name="telephone" value="5566778899"/>
+            <column name="email" value="emily.davis@example.com"/>
+            <column name="order" value="4"/>
+        </insert>
+
+        <insert tableName="option">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Photography"/>
+            <column name="done" valueBoolean="false"/>
+            <column name="order" value="1"/>
+        </insert>
+        <insert tableName="option">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Catering"/>
+            <column name="done" valueBoolean="false"/>
+            <column name="order" value="2"/>
+        </insert>
+        <insert tableName="option">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Music"/>
+            <column name="done" valueBoolean="false"/>
+            <column name="order" value="3"/>
+        </insert>
+        <insert tableName="option">
+            <column name="id" valueComputed="UUID_GENERATE_V4()"/>
+            <column name="name" value="Decoration"/>
+            <column name="done" valueBoolean="true"/>
+            <column name="order" value="4"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

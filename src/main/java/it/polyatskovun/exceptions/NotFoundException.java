@@ -1,4 +1,4 @@
-package it.vverba.demo.exceptions;
+package it.polyatskovun.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
