@@ -2,6 +2,7 @@ package it.polyatskovun.controller;
 
 import it.polyatskovun.dto.Event;
 import it.polyatskovun.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+    public ResponseEntity<Event> createEvent(@RequestBody @Valid Event event) {
         Event createdEvent = service.save(event);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
     }

@@ -49,17 +49,21 @@ public class EventMapper {
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
 
-        List<GuestEntity> guests = dto.getGuests()
-                .stream()
-                .map(guestMapper::toEntity)
-                .toList();
-        entity.setGuests(guests);
+        if(dto.getGuests() != null){
+            List<GuestEntity> guests = dto.getGuests()
+                    .stream()
+                    .map(guestMapper::toEntity)
+                    .toList();
+            entity.setGuests(guests);
+        }
 
-        List<OptionEntity> options = dto.getOptions()
-                .stream()
-                .map(optionMapper::toEntity)
-                .toList();
-        entity.setOptions(options);
+        if(dto.getOptions() != null){
+            List<OptionEntity> options = dto.getOptions()
+                    .stream()
+                    .map(optionMapper::toEntity)
+                    .toList();
+            entity.setOptions(options);
+        }
 
         return entity;
     }

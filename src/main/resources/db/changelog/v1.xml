@@ -143,4 +143,19 @@
         </insert>
     </changeSet>
 
+    <changeSet id="3" author="polyatskova">
+        <insert tableName="event_guest">
+            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
+            <column name="guest_id" value="cdfe425d-6ac9-4c6e-9f93-7e6f32625f70" />
+        </insert>
+
+        <insert tableName="event_option">
+            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
+            <column name="option_id" value="34800ea4-2817-4678-843c-5e23d5736dda" />
+        </insert>
+        <insert tableName="event_option">
+            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
+            <column name="option_id" value="aabd0523-40b1-436e-9274-15e032b3d24b" />
+        </insert>
+    </changeSet>
 </databaseChangeLog>
