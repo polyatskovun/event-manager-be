@@ -15,10 +15,10 @@ public class OptionEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     private String name;
 
-    private Boolean done;
+    private Boolean done = false;
 
     @Column(name = "\"order\"")
     private int order;

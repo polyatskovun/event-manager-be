@@ -2,6 +2,7 @@ package it.polyatskovun.controller;
 
 import it.polyatskovun.dto.Option;
 import it.polyatskovun.service.OptionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class OptionController {
     }
 
     @PostMapping
-    public ResponseEntity<Option> createOption(@RequestBody Option option) {
+    public ResponseEntity<Option> createOption(@RequestBody @Valid Option option) {
         Option createdOption = service.save(option);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOption);
     }

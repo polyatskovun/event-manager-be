@@ -27,6 +27,7 @@ public class EventMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDate(entity.getDate());
+        dto.setType(entity.getType());
 
         List<Guest> guests = entity.getGuests()
                 .stream()
@@ -48,6 +49,7 @@ public class EventMapper {
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
+        entity.setType(dto.getType());
 
         if(dto.getGuests() != null){
             List<GuestEntity> guests = dto.getGuests()

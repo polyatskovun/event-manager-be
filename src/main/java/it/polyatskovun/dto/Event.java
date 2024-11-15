@@ -1,5 +1,6 @@
 package it.polyatskovun.dto;
 
+import it.polyatskovun.enums.EventType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class Event {
     @NotNull
     private String name;
     @NotNull
+    private EventType type;
     private LocalDate date;
     private List<Guest> guests;
     private List<Option> options;

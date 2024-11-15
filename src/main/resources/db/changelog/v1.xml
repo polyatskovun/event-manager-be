@@ -144,18 +144,29 @@
     </changeSet>
 
     <changeSet id="3" author="polyatskova">
-        <insert tableName="event_guest">
-            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
-            <column name="guest_id" value="cdfe425d-6ac9-4c6e-9f93-7e6f32625f70" />
-        </insert>
+        <addColumn tableName="event">
+            <column name="type" type="VARCHAR(32)" defaultValue="OTHER" />
+        </addColumn>
 
-        <insert tableName="event_option">
-            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
-            <column name="option_id" value="34800ea4-2817-4678-843c-5e23d5736dda" />
-        </insert>
-        <insert tableName="event_option">
-            <column name="event_id" value="a5c7f1b7-6574-4e63-9011-04e5c2a95bb8" />
-            <column name="option_id" value="aabd0523-40b1-436e-9274-15e032b3d24b" />
-        </insert>
+        <!-- Оновити значення type для існуючих записів -->
+        <update tableName="event">
+            <column name="type" value="WEDDING" />
+            <where>name = 'Wedding'</where>
+        </update>
+
+        <update tableName="event">
+            <column name="type" value="CORPORATE" />
+            <where>name = 'Corporate Meeting'</where>
+        </update>
+
+        <update tableName="event">
+            <column name="type" value="BIRTHDAY" />
+            <where>name = 'Birthday Party'</where>
+        </update>
+
+        <update tableName="event">
+            <column name="type" value="CHARITY" />
+            <where>name = 'Charity Gala'</where>
+        </update>
     </changeSet>
 </databaseChangeLog>

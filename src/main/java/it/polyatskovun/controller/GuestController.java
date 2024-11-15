@@ -2,6 +2,7 @@ package it.polyatskovun.controller;
 
 import it.polyatskovun.dto.Guest;
 import it.polyatskovun.service.GuestService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class GuestController {
     }
 
     @PostMapping
-    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
+    public ResponseEntity<Guest> createGuest(@RequestBody @Valid Guest guest) {
         Guest createdGuest = service.save(guest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdGuest);
     }

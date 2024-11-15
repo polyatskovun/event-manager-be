@@ -15,7 +15,7 @@ public class GuestEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     private String name;
 
     @Column(length = 12)

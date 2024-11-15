@@ -1,5 +1,6 @@
 package it.polyatskovun.entity;
 
+import it.polyatskovun.enums.EventType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,12 +18,16 @@ public class EventEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private EventType type;
 
     private LocalDate date;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "event_guest",
             joinColumns = @JoinColumn(name = "event_id"),
@@ -30,7 +35,7 @@ public class EventEntity {
     )
     private List<GuestEntity> guests;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "event_option",
             joinColumns = @JoinColumn(name = "event_id"),
