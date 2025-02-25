@@ -3,6 +3,7 @@ package it.polyatskovun.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Entity
 public class OptionEntity {
     @Id
-    @GeneratedValue
+    @UuidGenerator
     private UUID id;
 
     @Column(nullable = false)

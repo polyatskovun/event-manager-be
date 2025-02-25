@@ -7,6 +7,7 @@ public enum EventType {
     HALLOWEEN("Геллоуін"),
     NEW_YEAR("Новий рік"),
     CHRISTMAS("Різдво"),
+    CHARITY("Charity Gala"),
     ANNIVERSARY("Ювілей"),
     OTHER("Інше");
 

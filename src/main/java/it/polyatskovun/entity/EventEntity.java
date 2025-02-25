@@ -4,6 +4,7 @@ import it.polyatskovun.enums.EventType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.UUID;
 @Data
 @EqualsAndHashCode(of = "id")
 @Table(name = "event")
-@Entity()
+@Entity
 public class EventEntity {
     @Id
-    @GeneratedValue
+    @UuidGenerator
     private UUID id;
 
     @Column(nullable = false)
